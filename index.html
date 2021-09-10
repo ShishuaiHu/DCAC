@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="page_files/head.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <meta name="description" content="Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation">
+    <meta name="keywords" content="Domain Generalization,Medical Image Segmentation,Dynamic Network">
+
+    <title>DCAC</title>
+    <link rel="stylesheet" href="page_files/font.css">
+    <link rel="stylesheet" href="page_files/main.css">
+
+
+    <style type="text/css">
+        .layered-paper-big {
+            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+            box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0, 0, 0, 0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0, 0, 0, 0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0, 0, 0, 0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0, 0, 0, 0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+            /* The fifth layer shadow */
+            margin-left: 10px;
+            margin-right: 45px;
+        }
+    </style>
+
+</head>
+
+<body data-gr-c-s-loaded="true" data-new-gr-c-s-check-loaded="14.1028.0" data-gr-ext-installed="">
+
+    <div class="outercontainer">
+        <div class="container">
+
+    <div class="content project_title">
+        <h1>Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation</h1>
+    </div>
+
+    <div class="content project_headline">
+        <center>
+            <h2>
+            <table align="center" width="800px">
+                <tbody>
+                    <tr>
+                        <td align="center" width="100px">
+                            <center>
+                                <span style="font-size:20px"><a href="https://shishuaihu.github.io/">
+                                Shishuai Hu</a></span><br><span style="font-size:15px">Northwestern Polytechnical University</span>
+                            </center>
+                        </td>
+                        <td align="center" width="100px">
+                            <center>
+                                <span style="font-size:20px">
+                                Zehui Liao</a></span><br><span style="font-size:15px">Northwestern Polytechnical University</span>
+                            </center>
+                        </td>
+                        <td align="center" width="100px">
+                            <center>
+                                <span style="font-size:20px"><a href="https://jianpengz.github.io/">
+                                Jiangpeng Zhang</a></span><br><span style="font-size:15px">Northwestern Polytechnical University</span>
+                            </center>
+                        </td>
+                        <td align="center" width="100px">
+                            <center>
+                                <span style="font-size:20px"><a href="https://teacher.nwpu.edu.cn/yongxia">
+                                Yong Xia</a></span><br><span style="font-size:15px">Northwestern Polytechnical University</span>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </h2>
+        </center>
+    </div>
+
+    <div class="content project_headline">
+        <center>
+            <h2>
+                <table align="center" width="800px">
+                <tbody>
+                    <tr>
+                        <td align="center" width="150px">
+                            <center>
+                                <span style="font-size:18px"></span>
+                            </center>
+                        </td>
+                        <td align="center" width="200px">
+                            <center>
+                                <span style="font-size:18px">Code <a href="https://github.com/ShishuaiHu/DCAC"> [GitHub]</a></span>
+                            </center>
+                        </td>
+                        <td align="center" width="200px">
+                            <center>
+                                <span style="font-size:18px">arXiv<a href="https://arxiv.org/abs/2003.09005"> [Paper]</a></span>
+                            </center>
+                        </td>
+                        <!-- <td align="center" width="200px">
+                            <center>
+                                <span style="font-size:18px">Poster<a href="https://yassouali.github.io/cct_page/files/poster.pdf"> [pdf]</a></span>
+                            </center>
+                        </td>
+                        <td align="center" width="200px">
+                            <center>
+                                <span style="font-size:18px">Slides<a href="https://yassouali.github.io/cct_page/files/slides.pdf"> [pdf]</a></span>
+                            </center>
+                        </td> -->
+                        <td align="center" width="150px">
+                            <center>
+                                <span style="font-size:18px"></span>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </h2>
+        </center>
+    </div>
+
+    		<br> <br>
+            <div class="content project_headline">
+                <div class="img" style="text-align:center; width: 900px;">
+                    <img class="img_responsive" src="page_files/overview.png" alt="overview">
+                </div>
+                <div class="text">
+                    <p>Figure 1: Architecture of the proposed method. The feature map in orange color represents GAP(f_E^N), i.e., the output of the N-th encoder block after global average pooling.</p>
+                </div>
+            </div>
+            <br> <br>
+
+            <div class="content">
+                <div class="text">
+                    <h2>Abstract</h2>
+                    <p>
+The domain gap caused mainly by variable medical image quality renders a major obstacle on the path between training a segmentation model in the lab and applying the trained model to unseen clinical data. To address this issue, domain generalization methods have been proposed, which however usually use static convolutions and are less flexible.
+In this paper, we propose a multi-source domain generalization model, namely domain and content adaptive convolution (DCAC), for medical image segmentation.
+Specifically, we design the domain adaptive convolution (DAC) module and content adaptive convolution (CAC) module and incorporate both into an encoder-decoder backbone.
+In the DAC module, a dynamic convolutional head is conditioned on the predicted domain code of the input to make our model adapt to the unseen target domain.
+In the CAC module, a dynamic convolutional head is conditioned on the global image features to make our model adapt to the test image.
+We evaluated the DCAC model against the baseline and four state-of-the-art domain generalization methods on the prostate segmentation, COVID-19 lesion segmentation, and optic cup/optic disc segmentation tasks.
+Our results indicate that the proposed DCAC model outperforms all competing methods on each segmentation task, and also demonstrate the effectiveness of the DAC and CAC modules.
+                    </p>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="text">
+                    <h2>Highlights</h2>
+                    <div class="text">
+                        <p><b> (1) Consistency Training for semantic segmentation.</b> <br>
+                            We observe that for semantic segmentation, due to the dense nature of the task,
+                            the cluster assumption is more easily enforced over the hidden representations rather than the inputs.</p>
+                    </div>
+
+                    <div class="text">
+                        <p><b> (2) Cross-Consistency Training. </b> <br>
+                            We propose CCT (Cross-Consistency Training) for semi-supervised semantic segmentation, where we several
+                            novel perturbations, and show the effectiveness of enforcing consistency over the encoder's outputs
+                            rather than the inputs.</p>
+                    </div>
+
+                    <div class="text">
+                        <p><b> (3) Using weak-labels and pixel-level labels from multiple domains.</b> <br>
+                            The proposed method is quite simple and flexible, and can easily be extended to use image-level labels and
+                            pixel-level labels from multiple-domains.</p>
+                    </div>
+
+                    <div class="text">
+                        <p><b> (4) Competitive results on a number of benchmarks.</b> <br>
+                            We have shown competitive results on several semantic segmentation benchmarks, whether on semi-supervised semantic segmentation, with labels at the image level, and during training on several fields with partially or completely non-overlapping label spaces.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="text" style="width: 350px;">
+                    <h2>Publication</h2>
+                    <ul>
+                        <li>
+                            <div class="title"><a name="DCAC">Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation</a></div>
+                            <div class="authors">
+                                <a href="https://shishuaihu.github.io/">Shishuai Hu</a>,
+                                Zehui Liao,
+                                <a href="https://jianpengz.github.io/">Jianpeng Zhang</a>,
+                                <a href="https://teacher.nwpu.edu.cn/yongxia">Yong Xia</a>
+                            </div>
+                            <div>
+                                <span class="tag"><a href="https://arxiv.org/abs/2003.09005">arXiv</a></span>
+                                <span class="tag"><a href="https://github.com/ShishuaiHu/DCAC">Code</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text" style="text-align:left">
+                    <table align="center" width="200" px="">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="https://arxiv.org/abs/2003.09005">
+                                    <img class="layered-paper-big" style="height:175px" src="page_files/paper_thumb.png"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="text">
+                    <h2>Method</h2>
+                    <p> The objective of consistency training is to enforce an invariance of the model's predictions over small perturbations applied to the inputs. As a result, the learned decision boundary will reside in low density regions, and the learned model will be robust to such small changes. The effectiveness of consistency training depends heavily on the behavior of the data distribution, i.e., the cluster assumption, meaning low density regions must separate the classes. In semantic segmentation, we do not observe the presence of low density regions separating the classes within the inputs, but rather within the encoder's outputs. Based on this observation, we propose to enforce the consistency over different forms of perturbations applied to the encoder's output. Specifically, we consider a shared encoder and a main decoder that are trained using the labeled examples. To leverage unlabeled data, we then consider multiple auxiliary decoders whose inputs are perturbed versions of the output of the shared encoder. The consistency is imposed between the main decoder's predictions and that of the auxiliary decoders. This way, the shared encoder's representation is enhanced by using the additional training signal extracted from the unlabeled data, while still enforcing robustness across the introduced perturbations in an end-to-end manner. The added auxiliary decoders have a negligible amount of parameters compared to the encoder. Additionally, during inference, only the main decoder is used, reducing the computation overhead both in training and inference.
+                    </p>
+                </div>
+                <div class="img" style="text-align:center">
+                    <img class="img_responsive" src="page_files/method.png" alt="Method" style="margin:auto;max-width:65%">
+                </div>
+                <div class="text">
+                    <p>Figure 2: Illustration of the method. For one training iteration, we sample a labeled input image and its pixel-level label,
+                        together with an unlabeled image. We pass both images through the encoder and main decoder, obtaining two main predictions, for both
+                        the labeled and unlabeled examples. We compute the supervised loss using the pixel-level label and the main prediction.
+                        We apply various perturbations to the encoder's output corresponding to the unlabeled input, and generate auxiliary predictions
+                        using the K perturbed versions of z. The unsupervised loss is then computed between the outputs of the auxiliary decoders
+                        and that of the main-decoder.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="content">
+            	<h2>Main Results</h2>
+                <p>CCT outperforms previous works relying on the same level
+                of supervision and even methods which exploit image-level labels. We
+                also obtain impressive results when using with image-level labels and
+                when training on multiple domain confirming the flexibility of CCT.</p>
+                <div class="img" style="text-align:center">
+                    <img class="img_responsive" src="page_files/results.jpg" alt="Method" style="margin:auto;max-width:85%">
+                </div>
+
+            <div class="content">
+                <div class="text">
+                    <h3>Acknowledgments</h3>
+                    <p>This work was supported by Randstad corporate research chair. We would also like to thank
+                        Saclay-IA plateform of Université Paris-Saclay and Mésocentre computing center of CentraleSupélec and
+                        École Normale Supérieure Paris-Saclay for providing the computational resources.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="content">
+                <div class="text">
+                    <h2>Related Publications</h2>
+                    <ul>
+                        <li>
+                            <p>
+                            <a href="https://arxiv.org/abs/1906.01916">Semi-supervised semantic segmentation needs strong, varied perturbations.</a>
+                            Geoff French, Timo Aila, Samuli Laine, Michal Mackiewicz, Graham Finlayson. <i>BMVC 2020</i>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                            <a href="https://arxiv.org/abs/1806.04659">Adversarial Learning for Semi-Supervised Semantic Segmentation.</a>
+                            Wei-Chih Hung, Yi-Hsuan Tsai, Yan-Ting Liou, Yen-Yu Lin, Ming-Hsuan Yang. <i>BMVC 2018</i>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                            <a href="http://openaccess.thecvf.com/content_ICCV_2017/papers/Souly__Semi_Supervised_ICCV_2017_paper.pdf">Semi
+                                Supervised Semantic Segmentation Using Generative Adversarial Network.</a>
+                            Nasim Souly, Concetto Spampinato, Mubarak Shah. <i>ICCV 2017</i>
+                            </p>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+
+
+            <div class="content">
+                <div class="text">
+                    <b>Acknowledgement:</b> This page is based on <a href="https://hobbitlong.github.io/CMC/">this template</a>
+                    by <a href="http://people.csail.mit.edu/yonglong/"> Yonglong Tian </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="download_plus_animation"></div>
+
+
