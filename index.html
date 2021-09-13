@@ -125,14 +125,14 @@
 
     		<br> <br>
             <div class="content project_headline">
-                <div class="img" style="text-align:center; width: 900px;">
-                    <img class="img_responsive" src="page_files/overview.png" alt="overview">
+                <div class="img" style="text-align:center; max-width: 70%;">
+                    <img class="img_responsive" src="page_files/overview.png" alt="Overview">
                 </div>
                 <div class="text">
-                    <p>Figure 1: Architecture of the proposed method. The feature map in orange color represents GAP(f_E^N), i.e., the output of the N-th encoder block after global average pooling.</p>
+                    <p>Figure 1: Example of Domain Generalization in Medical Image Segmentation.</p>
                 </div>
             </div>
-            <br> <br>
+            <br> 
 
             <div class="content">
                 <div class="text">
@@ -153,27 +153,23 @@ Our results indicate that the proposed DCAC model outperforms all competing meth
                 <div class="text">
                     <h2>Highlights</h2>
                     <div class="text">
-                        <p><b> (1) Consistency Training for semantic segmentation.</b> <br>
-                            We observe that for semantic segmentation, due to the dense nature of the task,
-                            the cluster assumption is more easily enforced over the hidden representations rather than the inputs.</p>
+                        <p><b> (1) Multi-scale features based domain relationship modeling.</b> <br>
+We use the domain-discriminative information embedded in the encoder feature maps to generate the domain
+code of each input image, which establishes the relationship between multiple source domains and the unseen
+target domain.</p>
                     </div>
 
                     <div class="text">
-                        <p><b> (2) Cross-Consistency Training. </b> <br>
-                            We propose CCT (Cross-Consistency Training) for semi-supervised semantic segmentation, where we several
-                            novel perturbations, and show the effectiveness of enforcing consistency over the encoder's outputs
-                            rather than the inputs.</p>
+                        <p><b> (2) Domain and Content Adaptive Convolution. </b> <br>
+We design the dynamic convolution-based domain adaptive convolution (DAC) module and content adaptive convolution (CAC) module to enable our DCAC model to adapt
+not only to the unseen target domain but also to each test
+image.</p>
                     </div>
 
                     <div class="text">
-                        <p><b> (3) Using weak-labels and pixel-level labels from multiple domains.</b> <br>
-                            The proposed method is quite simple and flexible, and can easily be extended to use image-level labels and
-                            pixel-level labels from multiple-domains.</p>
-                    </div>
-
-                    <div class="text">
-                        <p><b> (4) Competitive results on a number of benchmarks.</b> <br>
-                            We have shown competitive results on several semantic segmentation benchmarks, whether on semi-supervised semantic segmentation, with labels at the image level, and during training on several fields with partially or completely non-overlapping label spaces.
+                        <p><b> (3) Competitive results on three benchmarks.</b> <br>
+We present extensive experiments, which demonstrate
+the effectiveness of our DCAC model against the state-of-the-art in three medical image segmentation benchmarks with different imaging modalities.
                         </p>
                     </div>
 
@@ -216,43 +212,86 @@ Our results indicate that the proposed DCAC model outperforms all competing meth
             <div class="content">
                 <div class="text">
                     <h2>Method</h2>
-                    <p> The objective of consistency training is to enforce an invariance of the model's predictions over small perturbations applied to the inputs. As a result, the learned decision boundary will reside in low density regions, and the learned model will be robust to such small changes. The effectiveness of consistency training depends heavily on the behavior of the data distribution, i.e., the cluster assumption, meaning low density regions must separate the classes. In semantic segmentation, we do not observe the presence of low density regions separating the classes within the inputs, but rather within the encoder's outputs. Based on this observation, we propose to enforce the consistency over different forms of perturbations applied to the encoder's output. Specifically, we consider a shared encoder and a main decoder that are trained using the labeled examples. To leverage unlabeled data, we then consider multiple auxiliary decoders whose inputs are perturbed versions of the output of the shared encoder. The consistency is imposed between the main decoder's predictions and that of the auxiliary decoders. This way, the shared encoder's representation is enhanced by using the additional training signal extracted from the unlabeled data, while still enforcing robustness across the introduced perturbations in an end-to-end manner. The added auxiliary decoders have a negligible amount of parameters compared to the encoder. Additionally, during inference, only the main decoder is used, reducing the computation overhead both in training and inference.
+                    <p> The proposed DCAC model is an encoder-decoder structure equipped with a domain predictor, a domain-aware controller, a content-aware controller, and a series of domain-adaptive heads and content-adaptive heads.
+The workflow of this model consists of four steps.
+First, the feature map produced by each encoder layer is aggregated and fed to the domain predictor.
+Second, based on the generated domain code, the domain-aware controller predicts the parameters of the domain-adaptive head.
+Third, the content-aware controller uses the final output of the encoder as its input to generate the parameters of the content-adaptive head.
+Finally, according to the deep supervision strategy, the output of each decoder layer is fed sequentially to a domain-adaptive head and a content-adaptive head, which predict the segmentation result on a pixel-by-pixel basis. 
+The diagram of our DCAC model is shown in Figure 2. 
                     </p>
                 </div>
                 <div class="img" style="text-align:center">
-                    <img class="img_responsive" src="page_files/method.png" alt="Method" style="margin:auto;max-width:65%">
+                    <img class="img_responsive" src="page_files/method.png" alt="Method" style="margin:auto;max-width:100%">
                 </div>
                 <div class="text">
-                    <p>Figure 2: Illustration of the method. For one training iteration, we sample a labeled input image and its pixel-level label,
-                        together with an unlabeled image. We pass both images through the encoder and main decoder, obtaining two main predictions, for both
-                        the labeled and unlabeled examples. We compute the supervised loss using the pixel-level label and the main prediction.
-                        We apply various perturbations to the encoder's output corresponding to the unlabeled input, and generate auxiliary predictions
-                        using the K perturbed versions of z. The unsupervised loss is then computed between the outputs of the auxiliary decoders
-                        and that of the main-decoder.
+                    <p>Figure 2: Architecture of the proposed method. The feature map in orange color represents GAP(f_E^N), i.e., the output of the N-th encoder block after global average pooling.
                     </p>
                 </div>
             </div>
 
-
             <div class="content">
-            	<h2>Main Results</h2>
-                <p>CCT outperforms previous works relying on the same level
-                of supervision and even methods which exploit image-level labels. We
-                also obtain impressive results when using with image-level labels and
-                when training on multiple domain confirming the flexibility of CCT.</p>
-                <div class="img" style="text-align:center">
-                    <img class="img_responsive" src="page_files/results.jpg" alt="Method" style="margin:auto;max-width:85%">
+                <div class="text">
+                    <h2>Datasets</h2>
+                    <p> Three datasets were used for this study.
+For prostate segmentation, the dataset contains 116 T2-weighted MRI cases from six domains. We preprocessed the MRI data and only preserved the slices with the prostate region for consistent and objective segmentation evaluation.
+For COVID-19 lesion segmentation, the dataset consists of 120 RT-PCR positive CT scans with pixel-level lesion annotations, collected from the first multi-institutional, multi-national expert annotated COVID-19 image database.
+For OC/OD segmentation, the dataset contains 789 cases for training and 281 cases for test, which are collected from four public fundus image datasets and have inconsistent statistical characteristics.
+The statistics of three datasets were summarized in Table 1.
+                    </p>
                 </div>
+                <div class="img" style="text-align:center">
+                    <img class="img_responsive" src="page_files/datasets.png" alt="Datasets" style="margin:auto;max-width:90%">
+                </div>
+                <div class="text">
+                    <p>Table 1: Statistics of three datasets used for this study.</p>
+                </div>
+                <br>
+                <div class="text">
+                    <h3>Datasets Download Link</h2>
+                    <ul>
+                        <li>
+                            <p>
+                            <a href="https://liuquande.github.io/SAML">Prostate segmentation and dataset details.</a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                            <a href="https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=80969742">COVID-19 lesion segmentation.</a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                            <a href="https://drive.google.com/file/d/1p33nsWQaiZMAgsruDoJLyatoq5XAH-TH/view?usp=sharing">OC/OD segmentation.</a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             <div class="content">
+                <div class="text">
+                    <h2>Main Results</h2>
+                    <p> We compared the proposed DCAC model with the ‘Intra-domain’ setting (i.e., training and testing on the data from the same domain), ‘DeepAll’ baseline (i.e., training on the data aggregated from all source domains and testing directly on the unseen target domain), and four DG methods, including (1) BigAug: a data-augmentation based method (Zhang et al. 2020), (2) SAML (Liu, Dou, and Heng 2020) and FedDG (Liu et al. 2021a): two meta-learning-based methods, and (3) DoFE: a domain-invariant feature learning approach (Wang et al. 2020).
+                    </p>
+                </div>
+                <div class="img" style="text-align:center">
+                    <img class="img_responsive" src="page_files/results.png" alt="Results" style="margin:auto;max-width:90%">
+                </div>
+                <div class="text">
+                    <p>Figure 3: Quantitative results and visualized results on three datasets.
+                    </p>
+                </div>
+            </div>
+            
+
+            <!-- <div class="content">
                 <div class="text">
                     <h3>Acknowledgments</h3>
-                    <p>This work was supported by Randstad corporate research chair. We would also like to thank
-                        Saclay-IA plateform of Université Paris-Saclay and Mésocentre computing center of CentraleSupélec and
-                        École Normale Supérieure Paris-Saclay for providing the computational resources.
+                    <p>
                     </p>
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="content">
@@ -261,24 +300,46 @@ Our results indicate that the proposed DCAC model outperforms all competing meth
                     <ul>
                         <li>
                             <p>
-                            <a href="https://arxiv.org/abs/1906.01916">Semi-supervised semantic segmentation needs strong, varied perturbations.</a>
-                            Geoff French, Timo Aila, Samuli Laine, Michal Mackiewicz, Graham Finlayson. <i>BMVC 2020</i>
+                            <a href="https://arxiv.org/abs/2010.06208">DoFE: Domain-oriented Feature Embedding for Generalizable Fundus Image Segmentation on Unseen Datasets.</a>
+                            Shujun Wang, Lequan Yu, Kang Li, Xin Yang, Chi-Wing Fu, Pheng-Ann Heng. <i>IEEE-TMI 2020</i>
                             </p>
                         </li>
                         <li>
                             <p>
-                            <a href="https://arxiv.org/abs/1806.04659">Adversarial Learning for Semi-Supervised Semantic Segmentation.</a>
-                            Wei-Chih Hung, Yi-Hsuan Tsai, Yan-Ting Liou, Yen-Yu Lin, Ming-Hsuan Yang. <i>BMVC 2018</i>
+                            <a href="https://arxiv.org/abs/2007.02035">Shape-aware Meta-learning for Generalizing Prostate MRI Segmentation to Unseen Domains.</a>
+                            Quande Liu, Qi Dou, Pheng-Ann Heng. <i>MICCAI 2020</i>
                             </p>
                         </li>
                         <li>
                             <p>
-                            <a href="http://openaccess.thecvf.com/content_ICCV_2017/papers/Souly__Semi_Supervised_ICCV_2017_paper.pdf">Semi
-                                Supervised Semantic Segmentation Using Generative Adversarial Network.</a>
-                            Nasim Souly, Concetto Spampinato, Mubarak Shah. <i>ICCV 2017</i>
+                            <a href="https://openaccess.thecvf.com/content/CVPR2021/html/Liu_FedDG_Federated_Domain_Generalization_on_Medical_Image_Segmentation_via_Episodic_CVPR_2021_paper.html">FedDG: Federated Domain Generalization on Medical Image Segmentation via Episodic Learning in Continuous Frequency Space.</a> 
+                            Quande Liu, Cheng Chen, Jing Qin, Qi Dou, Pheng-Ann Heng.<i>CVPR 2021</i>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                            <a href="http://openaccess.thecvf.com/content/CVPR2021/html/Zhang_DoDNet_Learning_To_Segment_Multi-Organ_and_Tumors_From_Multiple_Partially_CVPR_2021_paper.html">DoDNet: Learning To Segment Multi-Organ and Tumors From Multiple Partially Labeled Datasets.</a> 
+                            Jianpeng Zhang, Yutong Xie, Yong Xia, Chunhua Shen.<i>CVPR 2021</i>
                             </p>
                         </li>
                       </ul>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="text">
+                    <h2>Citation</h2>
+                    If this work is helpful for your research, please consider citing:
+                    <pre>
+                    <code>
+@article{hu2021dcac,
+        title={Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation},
+        author={Shishuai Hu and Zehui Liao and Jianpeng Zhang and Yong Xia},
+        journal={arXiv},
+        year={2021},
+}
+                    </code>
+                    </pre>
                 </div>
             </div>
 
