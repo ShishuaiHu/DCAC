@@ -8,12 +8,15 @@ This repo contains the official implementation of our paper: Domain and Content 
 ### Highlights
 
 **(1) Multi-scale features based domain relationship modeling.**
+
 We use the domain-discriminative information embedded in the encoder feature maps to generate the domain code of each input image, which establishes the relationship between multiple source domains and the unseen target domain.
 
 **(2) Domain and Content Adaptive Convolution.**
+
 We design the dynamic convolution-based domain adaptive convolution (DAC) module and content adaptive convolution (CAC) module to enable our DCAC model to adapt not only to the unseen target domain but also to each test image.
 
 **(3) Competitive results on three benchmarks.**
+
 We present extensive experiments, which demonstrate the effectiveness of our DCAC model against the state-of-the-art in three medical image segmentation benchmarks with different imaging modalities.
 
 ### Requirements
@@ -99,8 +102,8 @@ If you find this repo useful for your research, please consider citing the paper
 
 For any questions, please feel free to open an issue [here](https://github.com/ShishuaiHu/DCAC/issues/new).
 
-#### Acknowledgements
+### Acknowledgements
 
-- Pseudo-labels generation is based on Jiwoon Ahn's implementation [irn](https://github.com/jiwoon-ahn/irn).
-- Code structure was based on [Pytorch-Template](https://github.com/victoresque/pytorch-template/blob/master/README.m)
-- ResNet backbone was downloaded from [torchcv](https://github.com/donnyyou/torchcv)
+- The whole framework is based on [nnUNet](https://github.com/MIC-DKFZ/nnUNet).
+- The code of the dynamic convolution is adopted from [DoDNet](https://github.com/jianpengz/DoDNet)
+
