@@ -1,0 +1,3 @@
+export nnUNet_raw_data_base="~/DCAC/nnUNet_raw"
+export nnUNet_preprocessed="~/DCAC/nnUNet_preprocessed"
+export RESULTS_FOLDER="~/DCAC/nnUNet_trained_models"
