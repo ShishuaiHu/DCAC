@@ -58,14 +58,50 @@ The dataset details and the download link can be found in the [Project Page](htt
 ### Data Preprocessing
 
 ```bash
+python nnunet/dataset_conversion/Task1001_Prostate.py
+python nnunet/dataset_conversion/Task1007_COVID_19.py
+python nnunet/dataset_conversion/Task1011_Fundus.py
+
+# Prostate
+nnUNet_plan_and_preprocess -t 1001
+nnUNet_plan_and_preprocess -t 1002
+nnUNet_plan_and_preprocess -t 1003
+nnUNet_plan_and_preprocess -t 1004
+nnUNet_plan_and_preprocess -t 1005
+nnUNet_plan_and_preprocess -t 1006
+# COVID_19
+nnUNet_plan_and_preprocess -t 1007
+nnUNet_plan_and_preprocess -t 1008
+nnUNet_plan_and_preprocess -t 1009
+nnUNet_plan_and_preprocess -t 1010
+# Fundus
+nnUNet_plan_and_preprocess -t 1011
+nnUNet_plan_and_preprocess -t 1012
+nnUNet_plan_and_preprocess -t 1013
+nnUNet_plan_and_preprocess -t 1014
 ```
-
-
 
 
 ### Training
 
 ```bash
+# Prostate
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1001 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1002 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1003 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1004 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1005 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Prostate 1006 all
+# COVID_19
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 3d_fullres DCACTrainer_COVID 1007 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 3d_fullres DCACTrainer_COVID 1008 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 3d_fullres DCACTrainer_COVID 1009 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 3d_fullres DCACTrainer_COVID 1010 all
+# Fundus
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Fundus 1011 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Fundus 1012 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Fundus 1013 all
+CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Fundus 1014 all
 ```
 
 
@@ -74,6 +110,8 @@ The dataset details and the download link can be found in the [Project Page](htt
 ### Inference
 
 ```bash
+# Prostate
+CUDA_VISIBLE_DEVICES=0 nnUNet_predict -i $nnUNet_raw_data_base/nnUNet_raw_data/Task1001_Target_BIDMC/imagesTs 
 ```
 
 
