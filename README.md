@@ -1,5 +1,5 @@
 # :page_facing_up: Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation (DCAC)
-#### [Paper](https://arxiv.org/abs/2003.09005), [Project Page](https://shishuaihu.github.io/DCAC/)
+#### [Paper](https://arxiv.org/abs/2109.05676), [Project Page](https://shishuaihu.github.io/DCAC/)
 
 This repo contains the official implementation of our paper: Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation, which adapts dynamic convolution for domain generalization.
 
@@ -111,7 +111,8 @@ CUDA_VISIBLE_DEVICES=0 nnUNet_train 2d DCACTrainer_Fundus 1014 all
 
 ```bash
 # Prostate
-CUDA_VISIBLE_DEVICES=0 nnUNet_predict -i $nnUNet_raw_data_base/nnUNet_raw_data/Task1001_Target_BIDMC/imagesTs 
+CUDA_VISIBLE_DEVICES=0 nnUNet_predict -i $nnUNet_raw_data_base/nnUNet_raw_data/Task1001_Target_BIDMC/imagesTs -o $RESULTS_FOLDER/nnUNet/2d/Task1001_Target_BIDMC/DCACTrainer_Prostate__nnUNetPlansv2.1/predictions -t 1001 -m 2d -tr DCACTrainer_Prostate --save_npz -f all
+# Others are similar to this command
 ```
 
 
@@ -130,11 +131,13 @@ Pre-trained models can be downloaded [here](https://github.com/yassouali/CCT/rel
 If you find this repo useful for your research, please consider citing the paper as follows:
 
 ```
-@article{hu2021dcac,
-        title={Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation},
-        author={Shishuai Hu and Zehui Liao and Jianpeng Zhang and Yong Xia},
-        journal={arXiv},
-        year={2021},
+@misc{hu2021domain,
+      title={Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation}, 
+      author={Shishuai Hu and Zehui Liao and Jianpeng Zhang and Yong Xia},
+      year={2021},
+      eprint={2109.05676},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
 }
 ```
 
