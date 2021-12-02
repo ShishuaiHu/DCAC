@@ -117,15 +117,6 @@ CUDA_VISIBLE_DEVICES=0 nnUNet_predict -i $nnUNet_raw_data_base/nnUNet_raw_data/T
 
 
 
-### Pre-trained models
-
-Pre-trained models can be downloaded [here](https://github.com/yassouali/CCT/releases).
-
-```bash
-```
-
-
-
 ### Citation ✏️ 📄
 
 If you find this repo useful for your research, please consider citing the paper as follows:
