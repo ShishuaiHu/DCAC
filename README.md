@@ -132,8 +132,6 @@ If you find this repo useful for your research, please consider citing the paper
 }
 ```
 
-For any questions, please feel free to open an issue [here](https://github.com/ShishuaiHu/DCAC/issues/new).
-
 ### Acknowledgements
 
 - The whole framework is based on [nnUNet](https://github.com/MIC-DKFZ/nnUNet).
