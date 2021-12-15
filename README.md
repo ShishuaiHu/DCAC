@@ -1,7 +1,7 @@
-# :page_facing_up: Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation (DCAC)
+# :page_facing_up: Domain and Content Adaptive Convolution based Multi-Source Domain Generalization for Medical Image Segmentation (DCAC)
 #### [Paper](https://arxiv.org/abs/2109.05676), [Project Page](https://shishuaihu.github.io/DCAC/)
 
-This repo contains the official implementation of our paper: Domain and Content Adaptive Convolution for Domain Generalization in Medical Image Segmentation, which adapts dynamic convolution for domain generalization.
+This repo contains the official implementation of our paper: Domain and Content Adaptive Convolution based Multi-Source Domain Generalization for Medical Image Segmentation, which adapts dynamic convolution for domain generalization.
 
 <p align="center"><img src="https://shishuaihu.github.io/DCAC/page_files/method.png" width="90%"></p>
 
