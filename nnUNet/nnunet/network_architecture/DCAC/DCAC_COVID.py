@@ -387,7 +387,7 @@ class DCAC_COVID(Generic_UNet):
                 res_da_out = head_inputs
                 da_out = self.heads_forward(head_inputs, da_weights, da_biases, N)
                 da_out = F.group_norm(da_out, num_groups=N)
-                da_out += res_da_out
+                da_out = res_da_out - da_out
                 da_out = F.leaky_relu(da_out)
                 logits = self.heads_forward(da_out, weights, biases, N)
                 logits = logits.reshape(N, -1, D, H, W)
